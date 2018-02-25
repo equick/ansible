@@ -1,0 +1,28 @@
+#docker build -t eg_sshd .
+#docker rmi eg_sshd
+#docker network create -d bridge --subnet 172.25.0.0/16 isolated_nw
+
+
+echo -n "clean up? : "
+read -s cleanup
+echo
+if [[ "$cleanup" == "y" ]]; then
+  for m in lb01 app01 app02 db01 control01; do
+    docker kill $m
+    docker rm $m
+  done
+fi
+
+
+#i=2
+#for m in lb01 app01 app02 db01 control01; do
+#  echo "creating $m"
+#  hostip="172.25.0.$i"
+#  docker run -d -P --name $m --net isolated_nw --ip $hostip eg_sshd
+#  echo "$hostip $m"
+#  i=$(( i + 1 ))
+#done
+#
+
+# attach containet to network
+# docker network connect --ip 172.25.0.23 isolated_nw docker_app02_1
