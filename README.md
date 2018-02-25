@@ -1,2 +1,2 @@
 # ansible
-ansible scripts to build a web stack
+Ansible scripts to build a web stack in Docker
